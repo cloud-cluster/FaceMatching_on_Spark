@@ -225,7 +225,7 @@
                             $('#loading').hide();
                             //alert(data.data)
                             console.dir(data);
-                            $('#blah2').attr('src', 'http://202.45.128.135:10062/MatchFaces/'+data.data.cat_photo);
+                            $('#blah2').attr('src', 'http://202.45.128.135:10062/FaceMatching_on_Spark/'+data.data.cat_photo);
                             $('#blah2').one("load", function() {
                               // do stuff
                             }).each(function() {
