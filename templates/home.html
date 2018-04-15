@@ -225,18 +225,23 @@
                             $('#loading').hide();
                             //alert(data.data)
                             console.dir(data);
-                            $('#blah2').attr('src', 'http://202.45.128.135:10062/FaceMatching_on_Spark/'+data.data['human_photo']);
+                            $('#blah2').attr('src', 'http://202.45.128.135:10062/MatchFaces/'+data.data.cat_photo);
                             $('#blah2').one("load", function() {
                               // do stuff
                             }).each(function() {
                               if(this.complete) $(this).load();
                             });                        
-                        }else {
+                        } else {
+                            //{"status": "fail", "data": {"cat_photo": null, "human_photo": null}, "error": 0 检测人脸失败  1 分布式失败}
                             $('#loading').hide();
-                            alert('You are so handsome that no cat could match you! Maybe change another photo?')
-                            console.log('fail');
-                            $('#blah').attr('src', '#');
-                        }
+                            if(error == 0 || error == '0'){
+                                console.log('face detection error!');
+                                alert('You are so handsome that no cat could match you! Maybe change another photo?')
+                                $('#blah').attr('src', '#');
+                            }else{
+                                console.log('system error!');
+                                alert('System is ill, maybe visit us another day honey ~')
+                            }
                     }
                 })
             }else{
