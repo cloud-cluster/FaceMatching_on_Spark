@@ -63,7 +63,7 @@ def upload(request):
             if result == 0:
                 ret['status'] = 'success'
                 ret['data']['human_photo'] = file_path
-                ret['data']['human_photo'] = cat_photo_path
+                ret['data']['cat_photo'] = cat_photo_path
             else:
                 ret['error'] = 1
 
