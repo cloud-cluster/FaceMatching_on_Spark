@@ -7,10 +7,10 @@ import cv2
 
 human_photo_path = "/FaceMatching_on_Spark/Results/human_photo.png"
 cat_photo_path = "/FaceMatching_on_Spark/Results/cat_photo.png"
-human_haar_cascade_path = "/static/HaarCascade/haarcascade_frontalface_default.xml"
+human_haar_cascade_path = "static/haarcascade/haarcascade_frontalface_default.xml"
 shell_path = "/script/CalculateSimilarity.sh"
 
-faceCascade_human = cv2.CascadeClassifier(human_haar_cascade_path)
+client = Client("http://student62:50070")
 
 
 # function of detecting human face
@@ -22,7 +22,8 @@ faceCascade_human = cv2.CascadeClassifier(human_haar_cascade_path)
 def detect_human(human_path):
     img = cv2.imread(human_path)
     gray = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
-    faces = faceCascade_human.detectMultiScale(
+    face_cascade_human = cv2.CascadeClassifier(human_haar_cascade_path)
+    faces = face_cascade_human.detectMultiScale(
         gray,
         scaleFactor=1.14,
         minNeighbors=5,
@@ -54,13 +55,13 @@ def upload(request):
             ret['status'] = 'fail'
             ret['error'] = "Failed to detect the human face."
         else:
-            client.upload(human_photo_path, pic_file, overwrite=True)
+            client.upload(human_photo_path, file_path, overwrite=True)
 
             result = os.system(shell_path)     # run shell
 
             if result == 0:
                 ret['status'] = 'success'
-                ret['data']['human_photo'] = human_photo_path
+                ret['data']['human_photo'] = file_path
                 ret['data']['human_photo'] = cat_photo_path
             else:
                 ret['error'] = "Failed to calculate the similarity."
