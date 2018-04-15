@@ -251,6 +251,10 @@
             
         })
 
+        $("file_pic").change(function(){
+            $('#blah').attr('src', '#');
+            $('#blah2').attr('src', '#');
+        });
         $("#file_pic").change(function(){
             readURL(this);
         });
