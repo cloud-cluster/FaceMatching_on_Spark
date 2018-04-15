@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta http-equiv="Cache-Control" content="no-siteapp">
+    <meta name="author" content="" />
+    <meta name="description" content="" />
+    <meta name="keywords" content="" /> 
+    <meta name="viewport" content="width=device-width,minimal-ui=yes,initial-scale=1.0,maximum-scale=1.0,user-scalable=no">
+    <style>
+        * {
+            box-sizing: border-box;
+            padding: 0;
+            margin: 0;
+        }
+        html,body {
+            width: 100%;
+            height: 100%;
+            /* background-color: #15adbc; */
+            background: #22313f;
+            font-size: 12px;
+        }
+        #starsBox {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.75);
+            opacity: .5;
+        }
+        #starsBox span {
+            display: inline-block;
+            width: auto;
+            position: absolute;
+            border-radius: 100%;
+            transition: 100s linear;
+        }
+        p {
+            position: fixed;
+            top: 50%;
+            left: 0;
+            right: 0;
+            text-align: center;
+            transform: translateY(-50%);
+            font-size: 40px;
+            font-weight: 900;
+            color: white;
+            text-shadow: 0 0 50px black;
+            text-transform: uppercase;
+            font-family: 'Roboto', 'Helvetica', 'Arial', sans-serif;
+            letter-spacing: 5px;
+        }
+        p > span:not(.comeon_text) {
+            display: block;
+            font-size: 12px;
+            color: #bdc3c7;
+            margin-top: 30px;
+            font-weight: 100;
+            text-shadow: 0 0 50px black;
+            letter-spacing: 3px;
+        }
+        p > span > a {
+            font-weight: 700;
+            text-decoration: none;
+            color: #d64541;
+            padding-bottom: 2px;
+            border-bottom: 0px solid #d64541;
+            transition: 0.5s;
+        }
+        p > span > a:hover {
+            padding-bottom: 5px;
+            border-bottom: 2px solid #d64541;
+        }
+        img {
+            width: 100%;
+            height: 100%;
+        }
+        .container {
+            width: 100%;
+            }
+        .comeon_note {
+            opacity: 1;
+            z-index: 5;
+            position: relative;
+            width: 35rem;
+            height: 26rem;
+            border-radius: 3rem;
+            border: 2px solid #726F6F;
+            background-color: #E7DFDD;
+            margin: 0 auto;
+            margin-top: 1rem;
+            -webkit-box-sizing: border-box;
+            box-sizing: border-box;
+            padding: 2rem;
+            font-size: 1.6rem;
+            overflow: hidden;
+        }
+        .comeon_text{
+            /*color: #fff;*/
+        }
+        .comeon_note_submit{
+            width: 10rem;
+            height: 3rem;
+            background-color: #726F6F;
+            color: #d8d8d8;
+            text-align: center;
+            line-height: 3rem;
+            position: absolute;
+            border-radius: 2.5rem;
+            font-size: 2rem;
+            border: 0px solid #111;
+            left: 37%;
+            bottom: 0.5rem;
+            cursor: pointer;
+        }
+        .origin_pic{
+            width: 49%;
+            height: 15rem;
+            overflow: hidden;
+            display: inline-block;
+        }
+        .comeon_title{
+            color: #fff;
+            font-size: 2rem;
+            margin:0 auto;
+            width: 400px;
+            padding-top: 20px;
+            height:70px;   
+            line-height:50px;   
+            overflow:hidden; 
+        }
+        .loading{
+            /*border: 1px solid;*/
+            opacity: 1;
+            width: 400px;
+            position: absolute;
+            top: 91px;
+            margin: 0 auto;
+            left: calc(50% - 200px);
+            z-index: 99;
+            border-radius: 40px;
+            overflow: hidden;
+            display: none;
+        }
+    </style>
+    <script src="https://ajax.aspnetcdn.com/ajax/jQuery/jquery-3.3.1.min.js"></script>
+</head>
+<body>
+<div class="container" id="starsBox">
+    <p><span>
+    <!-- <div class="comeon_hat">
+        <div class="comeon_hat_roundup"></div>
+        <div class="comeon_hat_rect"></div>
+        <div class="comeon_hat_rectdown"></div>
+        <div class="comeon_hat_rounddown"></div>
+    </div>
+    <div class="comeon_glass">
+        <div class="comeon_glass_left"></div>
+        <div class="comeon_glass_right"></div>
+        <div class="comeon_glass_midrect"></div>
+    </div> -->
+    <div class="comeon_title">In a previous incarnation, You...</div>
+    <form id="form1">
+        <div class="comeon_note">
+            <div class="comeon_text">Please upload your photo：</div>
+            <input id="file_pic" type="file" accept="image/*" name="picture"/>
+            <div class="origin_pic">
+                <img id="blah" src="#" alt="" />
+            </div>
+            <div class="origin_pic">
+                <img id="blah2" src="#" alt="" />
+            </div>
+            <div class="comeon_note_submit" id="btn_upload">match!</div>
+        </div>
+    </form>
+    <div id="loading" class="loading">
+        <img src="http://202.45.128.135:10062/FaceMatching_on_Spark/static/image/cat.gif" alt="loading">
+    </div>
+</span></p></div>
+<script>
+    var cols = ['#f5d76e', '#f7ca18', '#f4d03f', '#ececec', '#ecf0f1', '#a2ded0'];
+    var stars = 250;
+
+    for (var i = 0; i <= stars; i++) {
+
+        var size = Math.random() * 3;
+        var color = cols[parseInt(Math.random() * 4)];
+
+        $('#starsBox').prepend('<span style=" width: ' + size + 'px; height: ' + size + 'px; top: ' + Math.random() * 100 + '%; left: ' + Math.random() * 100 + '%; background: ' + color + '; box-shadow: 0 0 ' + Math.random() * 10 + 'px' + color + ';"></span>');
+    };
+
+    setTimeout(function() {
+        $('#starsBox span').each(function() {
+            $(this).css('top', Math.random() * 100 + '%').css('left', Math.random() * 100 + '%');
+        });
+    }, 1);
+
+    setInterval(function() {
+        $('#starsBox span').each(function() {
+            $(this).css('top', Math.random() * 100 + '%').css('left', Math.random() * 100 + '%');
+        });
+    }, 100000);
+</script>
+<script>
+    $(document).ready(function(){
+        $('#btn_upload').click(function() {
+            var fd = new FormData();
+            var photo = $("#file_pic")[0].files[0];
+            console.log('photo=',photo)
+            if (photo != '' && photo != undefined) {
+                $('#loading').show();
+                fd.append('photo', photo);
+                console.log('fd=', fd);
+                $.ajax({
+                    url: '/upload/',
+                    type: "POST",
+                    data: fd,
+                    processData: false,  // 告诉jQuery不要去处理发送的数据
+                    contentType: false,   // 告诉jQuery不要去设置Content-Type请求头
+                    success: function (data) {
+                        console.dir('data=',data)
+                        if (data.status == 'success') {
+                            $('#loading').hide();
+                            //alert(data.data)
+                            console.dir(data);
+                            $('#blah2').attr('src', 'http://202.45.128.135:10062/MatchFaces/'+data.data);
+                            $('#blah2').one("load", function() {
+                              // do stuff
+                            }).each(function() {
+                              if(this.complete) $(this).load();
+                            });                        
+                        }else {
+                            $('#loading').hide();
+                            alert('You are so handsome that no cat could match you! Maybe change another photo?')
+                            console.log('fail');
+                            $('#blah').attr('src', '#');
+                        }
+                    }
+                })
+            }else{
+                alert('Please choose an image honey ~')
+            }
+            
+        })
+
+        $("#file_pic").change(function(){
+            readURL(this);
+        });
+        function readURL(input){
+            if (input.files && input.files[0]) {
+                var reader = new FileReader();
+                
+                reader.onload = function (e) {
+                    $('#blah').attr('src', e.target.result);
+                }
+                
+                reader.readAsDataURL(input.files[0]);
+            }
+        }
+   })
+
+</script>
+</body>
+</html>
