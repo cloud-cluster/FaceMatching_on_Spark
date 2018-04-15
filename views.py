@@ -54,7 +54,7 @@ def upload(request):
         f.close()
         if detect_human(file_path) == 0:
             ret['status'] = 'fail'
-            ret['error'] = "Failed to detect the human face."
+            ret['error'] = 0
         else:
             client.upload(human_photo_path, file_path, overwrite=True)
 
@@ -65,7 +65,7 @@ def upload(request):
                 ret['data']['human_photo'] = file_path
                 ret['data']['human_photo'] = cat_photo_path
             else:
-                ret['error'] = "Failed to calculate the similarity."
+                ret['error'] = 1
 
         return HttpResponse(json.dumps(ret), content_type='application/json')
 
