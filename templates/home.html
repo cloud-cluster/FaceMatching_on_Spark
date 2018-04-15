@@ -206,6 +206,7 @@
 <script>
     $(document).ready(function(){
         $('#btn_upload').click(function() {
+            $('#blah').attr('src', '#');
             var fd = new FormData();
             var photo = $("#file_pic")[0].files[0];
             console.log('photo=',photo)
@@ -225,7 +226,13 @@
                             $('#loading').hide();
                             //alert(data.data)
                             console.dir(data);
+                            $('#blah').attr('src', 'http://202.45.128.135:10062/FaceMatching_on_Spark/'+data.data.human_photo);
                             $('#blah2').attr('src', 'http://202.45.128.135:10062/FaceMatching_on_Spark/'+data.data.cat_photo);
+                            $('#blah').one("load", function() {
+                              // do stuff
+                            }).each(function() {
+                              if(this.complete) $(this).load();
+                            });
                             $('#blah2').one("load", function() {
                               // do stuff
                             }).each(function() {
@@ -251,7 +258,7 @@
             
         })
 
-        $("file_pic").change(function(){
+        $("#file_pic").change(function(){
             $('#blah').attr('src', '#');
             $('#blah2').attr('src', '#');
         });
