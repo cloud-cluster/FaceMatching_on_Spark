@@ -234,7 +234,7 @@
                         } else {
                             //{"status": "fail", "data": {"cat_photo": null, "human_photo": null}, "error": 0 检测人脸失败  1 分布式失败}
                             $('#loading').hide();
-                            if(error == 0 || error == '0'){
+                            if(data.error == 0 || data.error == '0'){
                                 console.log('face detection error!');
                                 alert('You are so handsome that no cat could match you! Maybe change another photo?')
                                 $('#blah').attr('src', '#');
