@@ -7,7 +7,7 @@ import cv2
 
 human_photo_path = "/FaceMatching_on_Spark/Results/human_photo.png"
 # cat_photo_path = "/FaceMatching_on_Spark/Results/cat_photo.png"
-cat_photo_path = "static/image/cut_cat.jpg"
+cat_photo_path = "static/image/cut_cat.png"
 human_haar_cascade_path = "static/haarcascade/haarcascade_frontalface_default.xml"
 shell_path = "sudo /var/www/html/FaceMatching_on_Spark/script/CalculateSimilarity.sh"
 
