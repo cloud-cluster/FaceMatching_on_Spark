@@ -12,6 +12,7 @@ reload(sys)
 sys.setdefaultencoding('utf8')
 
 human_haar_cascade_path = "static/haarcascade/haarcascade_frontalface_default.xml"
+result_photo = "/var/www/html/FaceMatching_on_Spark/static/image/cat_photo.png"
 human_photo_path = 'static/image/human_photo.png'
 client = Client("http://student62:50070")
 find_path = '/var/www/html/database'
@@ -116,3 +117,5 @@ map_res_2 = map_res_1.map(lambda x: [x[0], get_avg(x[1], diff_human)])
 map_res_3 = map_res_2.map(lambda x: [x[0], get_ss(x[1])])
 map_res_4 = map_res_3.sortBy(lambda x: x[1], ascending=True).take(1)
 print "Find the most similar cat's photo! : " + map_res_4[0][0]
+cat_photo_path = "/var/www/html/database/Cat/" + map_res_4[0][0]
+os.system("cp %s %s" % (cat_photo_path, result_photo))
