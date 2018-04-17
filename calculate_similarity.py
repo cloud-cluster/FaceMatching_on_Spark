@@ -17,6 +17,17 @@ human_photo_path = 'static/image/human_photo.png'
 client = Client("http://student62:50070")
 find_path = '/var/www/html/database'
 
+conf = SparkConf().setAppName("FindCat").setMaster("yarn")
+sc = SparkContext(conf=conf)
+
+
+
+def run_spark()
+    # conf = SparkConf().setMaster("local").setAppName("My App")
+    # sc = SparkContext(conf=conf)
+    # time.sleep(3)
+    os.system("/opt/spark-2.2.1-bin-hadoop2.7/bin/spark-submit --master=yarn --driver-memory 7168m --executor-memory 4G /var/www/html/FaceMatching_on_Spark/calculate_similarity.py")
+    return 0
 
 # Detect features of human photo
 def detect_human_feature():
@@ -57,7 +68,7 @@ def find_feature_in_hbase(cat_img):
     cat_lists = []
     cat_features = []
     print "All the cat's photo amount = " + str(len(cat_img))
-    for i in range(0, 9949):
+    for i in range(0, 149):
         cat_feature = WHB.read_feature('database', cat_img[i])
         if cat_feature != 'Error':
             print "Photo No. = " + str(i) + "    Photo Name = " + str(cat_img[i])
@@ -107,8 +118,8 @@ WHB = hb.HbaseWrite()
 cat_lists = find_feature_in_hbase(cat_img)
 
 # Run on spark
-conf = SparkConf().setAppName("FindCat").setMaster("yarn")
-sc = SparkContext(conf=conf)
+# conf = SparkConf().setAppName("FindCat").setMaster("yarn")
+# sc = SparkContext(conf=conf)
 sc.setLogLevel("INFO")
 data = sc.parallelize(cat_lists, 8)
 
