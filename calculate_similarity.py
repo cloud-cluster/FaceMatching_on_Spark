@@ -100,22 +100,23 @@ def get_avg(f1, f2):
     return diff_list
 
 
-res = detect_human_feature()
-diff_human = get_diff(res)
-cat_img = find_img(find_path)
-WHB = hb.HbaseWrite()
-cat_lists = find_feature_in_hbase(cat_img)
+def run_spark():
+    res = detect_human_feature()
+    diff_human = get_diff(res)
+    cat_img = find_img(find_path)
+    WHB = hb.HbaseWrite()
+    cat_lists = find_feature_in_hbase(cat_img)
 
-# Run on spark
-conf = SparkConf().setAppName("FindCat").setMaster("yarn")
-sc = SparkContext(conf=conf)
-sc.setLogLevel("INFO")
-data = sc.parallelize(cat_lists, 8)
+    # Run on spark
+    conf = SparkConf().setAppName("FindCat").setMaster("yarn")
+    sc = SparkContext(conf=conf)
+    sc.setLogLevel("INFO")
+    data = sc.parallelize(cat_lists, 8)
 
-map_res_1 = data.map(lambda x: [x[0], x[1]])
-map_res_2 = map_res_1.map(lambda x: [x[0], get_avg(x[1], diff_human)])
-map_res_3 = map_res_2.map(lambda x: [x[0], get_ss(x[1])])
-map_res_4 = map_res_3.sortBy(lambda x: x[1], ascending=True).take(1)
-print "Find the most similar cat's photo! : " + map_res_4[0][0]
-cat_photo_path = "/var/www/html/database/Cat/" + map_res_4[0][0]
-os.system("cp %s %s" % (cat_photo_path, result_photo))
+    map_res_1 = data.map(lambda x: [x[0], x[1]])
+    map_res_2 = map_res_1.map(lambda x: [x[0], get_avg(x[1], diff_human)])
+    map_res_3 = map_res_2.map(lambda x: [x[0], get_ss(x[1])])
+    map_res_4 = map_res_3.sortBy(lambda x: x[1], ascending=True).take(1)
+    print "Find the most similar cat's photo! : " + map_res_4[0][0]
+    cat_photo_path = "/var/www/html/database/Cat/" + map_res_4[0][0]
+    os.system("cp %s %s" % (cat_photo_path, result_photo))

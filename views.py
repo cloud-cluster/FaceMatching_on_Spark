@@ -75,4 +75,5 @@ def upload(request):
 
 
 def test(request):
-    os.system("/opt/spark-2.2.1-bin-hadoop2.7/bin/spark-submit --master=yarn /var/www/html/FaceMatching_on_Spark/calculate_similarity.py")
+    # os.system("/opt/spark-2.2.1-bin-hadoop2.7/bin/spark-submit --master=yarn /var/www/html/FaceMatching_on_Spark/calculate_similarity.py")
+    run_spark()
