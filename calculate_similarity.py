@@ -52,7 +52,9 @@ def find_img(_path):
 
 
 # Find cat features in Hbase
-def find_feature_in_hbase():
+def find_feature_in_hbase(cat_img):
+    cat_lists = []
+    cat_features = []
     print "All the cat's photo amount = " + str(len(cat_img))
     for i in range(0, 9949):
         cat_feature = WHB.read_feature('database', cat_img[i])
@@ -63,6 +65,7 @@ def find_feature_in_hbase():
             print "Find features in Hbase!"
         else:
             print "Can not find the features in Hbase! The photo name is " + str(cat_img[i])
+    return cat_lists
 
 
 def get_diff(img):
@@ -100,14 +103,12 @@ res = detect_human_feature()
 diff_human = get_diff(res)
 cat_img = find_img(find_path)
 WHB = hb.HbaseWrite()
-cat_lists = []
-cat_features = []
-find_feature_in_hbase()
+cat_lists = find_feature_in_hbase(cat_img)
 
 # Run on spark
-conf = SparkConf().setAppName("FindMostSimilarPhoto").setMaster("yarn")
+conf = SparkConf().setAppName("FindCat").setMaster("yarn")
 sc = SparkContext(conf=conf)
-# sc.setLogLevel("INFO")
+sc.setLogLevel("INFO")
 data = sc.parallelize(cat_lists, 8)
 
 map_res_1 = data.map(lambda x: [x[0], x[1]])
