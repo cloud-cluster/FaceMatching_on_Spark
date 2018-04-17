@@ -109,6 +109,8 @@ def run_spark():
 
     # Run on spark
     conf = SparkConf().setAppName("FindCat").setMaster("yarn")
+    os.environ['SPARK_LOCAL_IP'] = conf.get(SECTION, 'SPARK_LOCAL_IP')
+
     sc = SparkContext(conf=conf)
     sc.setLogLevel("INFO")
     data = sc.parallelize(cat_lists, 8)
