@@ -4,6 +4,7 @@ from hdfs import *
 import json
 import cv2
 import time
+import os
 
 human_photo_path = "/FaceMatching_on_Spark/Results/human_photo.png"
 cat_photo_path = "static/image/cat_photo.png"
