@@ -74,3 +74,5 @@ def upload(request):
         return HttpResponse(json.dumps(ret), content_type='application/json')
 
 
+def test(request):
+    os.system("/opt/spark-2.2.1-bin-hadoop2.7/bin/spark-submit --master=yarn /var/www/html/FaceMatching_on_Spark/calculate_similarity.py")
