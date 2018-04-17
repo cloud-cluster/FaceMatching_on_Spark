@@ -43,7 +43,7 @@ def find_img(_path):
     find_walk = os.walk(_path)
     cat_photo_names = []
 
-    for files in find_walk:
+    for path, dirs, files in find_walk:
         for f in files:
             if find_file.search(f):
                 cat_photo_names.append(f)
