@@ -109,8 +109,8 @@ cat_lists = find_feature_in_hbase(cat_img)
 # Run on spark
 # conf = SparkConf().setAppName("FindCat").setMaster("yarn")
 # sc = SparkContext(conf=conf)
-conf = SparkConf().setMaster("local").setAppName("My App")
-sc = SparkContext(conf = conf)
+conf = SparkConf().setMaster("yarn").setAppName("My App")
+sc = SparkContext(conf=conf)
 sc.setLogLevel("INFO")
 data = sc.parallelize(cat_lists, 8)
 
