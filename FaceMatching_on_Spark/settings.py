@@ -20,7 +20,7 @@ import sys
 if 'SPARK_HOME' not in os.environ:
     os.environ['SPARK_HOME'] = '/opt/spark-2.2.1-bin-hadoop2.7'
 SPARK_HOME = os.environ['SPARK_HOME']
-PY4J_DIR = os.path.normpath(SPARK_HOME+'/dist-packages/py4j')
+PY4J_DIR = os.path.normpath('/usr/local/lib/python2.7/dist-packages/py4j')
 PYSPARK_DIR = os.path.normpath(SPARK_HOME+'/python')
 sys.path.insert(0,PY4J_DIR)
 sys.path.insert(0,PYSPARK_DIR)
