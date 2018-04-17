@@ -8,8 +8,8 @@ import cv2
 import os
 import re
 
-sys.setdefaultencoding('utf8')
 reload(sys)
+sys.setdefaultencoding('utf8')
 
 human_haar_cascade_path = "static/haarcascade/haarcascade_frontalface_default.xml"
 human_photo_path = 'static/image/human_photo.png'
