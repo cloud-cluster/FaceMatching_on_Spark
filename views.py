@@ -3,8 +3,10 @@ from django.http import HttpResponse
 from hdfs import *
 import json
 import cv2
-import runspark as cs
 import os
+
+reload(sys)
+sys.setdefaultencoding('utf8')
 
 human_photo_path = "/FaceMatching_on_Spark/Results/human_photo.png"
 cat_photo_path = "static/image/cat_photo.png"
@@ -57,12 +59,11 @@ def upload(request):
         else:
             client.upload(human_photo_path, file_path, overwrite=True)
 
-            os.system("python")
-            os.system("from pyspark import SparkConf, SparkContext")
-            os.system("conf = SparkConf().setMaster("'local'").setAppName("'My App'")")
-            os.system("sc = SparkContext(conf = conf)")
-            os.system("/opt/spark-2.2.1-bin-hadoop2.7/bin/spark-submit --master=yarn --driver-memory 7168m --executor-memory 4G /var/www/html/FaceMatching_on_Spark/calculate_similarity.py")
-            os.system("quit()")
+            os.system(
+                "/opt/spark-2.2.1-bin-hadoop2.7/bin/spark-submit --master=yarn --driver-memory 7168m "
+                "--executor-memory 4G /var/www/html/FaceMatching_on_Spark/calculate_similarity.py")
+
+            result = 0
 
             if result == 0:
                 ret['status'] = 'success'
