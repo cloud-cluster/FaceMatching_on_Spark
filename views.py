@@ -3,7 +3,7 @@ from django.http import HttpResponse
 from hdfs import *
 import json
 import cv2
-import calculate_similarity as cs
+import runspark as cs
 import os
 
 human_photo_path = "/FaceMatching_on_Spark/Results/human_photo.png"
@@ -57,7 +57,7 @@ def upload(request):
         else:
             client.upload(human_photo_path, file_path, overwrite=True)
 
-            result = cs.run_spark(1)
+            result = cs.run_spark()
 
             if result == 0:
                 ret['status'] = 'success'

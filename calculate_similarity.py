@@ -18,16 +18,6 @@ client = Client("http://student62:50070")
 find_path = '/var/www/html/database'
 
 
-def run_spark(flag):
-    # conf = SparkConf().setMaster("local").setAppName("My App")
-    # sc = SparkContext(conf=conf)
-    # time.sleep(3)
-    f = flag
-    if f == 1:
-        os.system("/opt/spark-2.2.1-bin-hadoop2.7/bin/spark-submit --master=yarn --driver-memory 7168m --executor-memory 4G /var/www/html/FaceMatching_on_Spark/calculate_similarity.py")
-        f -= 1
-    return 0
-
 # Detect features of human photo
 def detect_human_feature():
     human_photo = cv2.imread(human_photo_path)
