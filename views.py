@@ -1,10 +1,9 @@
-from pyspark import SparkConf, SparkContext
 from django.shortcuts import render
 from django.http import HttpResponse
 from hdfs import *
 import json
-import os
 import cv2
+import time
 
 human_photo_path = "/FaceMatching_on_Spark/Results/human_photo.png"
 cat_photo_path = "static/image/cat_photo.png"
@@ -57,9 +56,12 @@ def upload(request):
         else:
             client.upload(human_photo_path, file_path, overwrite=True)
 
-            conf = SparkConf().setMaster("local").setAppName("Success")
+            from pyspark import SparkConf, SparkContext
+            import os
+            conf = SparkConf().setMaster("local").setAppName("My App")
             sc = SparkContext(conf=conf)
-            result = os.system("sudo /opt/spark-2.2.1-bin-hadoop2.7/bin/spark-submit --master=yarn --driver-memory 7168m --executor-memory 4G /var/www/html/FaceMatching_on_Spark/calculate_similarity.py")     # run shell
+            time.sleep(3)
+            result = os.system("/opt/spark-2.2.1-bin-hadoop2.7/bin/spark-submit --master=yarn --driver-memory 7168m --executor-memory 4G /var/www/html/FaceMatching_on_Spark/calculate_similarity.py")
 
             if result == 0:
                 ret['status'] = 'success'
