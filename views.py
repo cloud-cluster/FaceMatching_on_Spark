@@ -57,7 +57,7 @@ def upload(request):
         else:
             client.upload(human_photo_path, file_path, overwrite=True)
 
-            result = cs.run_spark()
+            result = cs.run_spark(1)
 
             if result == 0:
                 ret['status'] = 'success'
