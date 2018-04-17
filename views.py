@@ -60,9 +60,7 @@ def upload(request):
         else:
             client.upload(human_photo_path, file_path, overwrite=True)
 
-            os.system(
-                "/opt/spark-2.2.1-bin-hadoop2.7/bin/spark-submit --master=yarn --driver-memory 7168m "
-                "--executor-memory 4G /var/www/html/FaceMatching_on_Spark/calculate_similarity.py")
+            os.system("/opt/spark-2.2.1-bin-hadoop2.7/bin/spark-submit --master=yarn --driver-memory 7168m --executor-memory 4G /var/www/html/FaceMatching_on_Spark/calculate_similarity.py")
 
             result = 0
 
