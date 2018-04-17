@@ -21,8 +21,7 @@ conf = SparkConf().setAppName("FindCat").setMaster("yarn")
 sc = SparkContext(conf=conf)
 
 
-
-def run_spark()
+def run_spark():
     # conf = SparkConf().setMaster("local").setAppName("My App")
     # sc = SparkContext(conf=conf)
     # time.sleep(3)
