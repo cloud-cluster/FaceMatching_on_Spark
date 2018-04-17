@@ -47,7 +47,7 @@ def upload(request):
         ret = {'status': 'fail', 'data': {'human_photo': None, 'cat_photo': None}, 'error': None}
 
         pic_file = request.FILES.get("photo")       # get photo
-        file_path = os.path.join("static/image", pic_file.name)
+        file_path = os.path.join("static/image", "human_photo.png")
         f = open(file_path, mode="wb")
         for chunk in pic_file.chunks():
             f.write(chunk)
