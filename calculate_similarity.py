@@ -53,7 +53,7 @@ def find_img(_path):
 
 
 # Find cat features in Hbase
-def find_feature_in_hbase(cat_img):
+def find_feature_in_hbase(cat_img,WHB):
     cat_lists = []
     cat_features = []
     print "All the cat's photo amount = " + str(len(cat_img))
@@ -105,7 +105,7 @@ def run_spark():
     diff_human = get_diff(res)
     cat_img = find_img(find_path)
     WHB = hb.HbaseWrite()
-    cat_lists = find_feature_in_hbase(cat_img)
+    cat_lists = find_feature_in_hbase(cat_img,WHB)
 
     # Run on spark
     conf = SparkConf().setAppName("FindCat").setMaster("yarn")
