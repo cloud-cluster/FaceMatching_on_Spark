@@ -3,6 +3,7 @@ from django.http import HttpResponse
 from hdfs import *
 import json
 import cv2
+import sys
 import os
 
 reload(sys)
