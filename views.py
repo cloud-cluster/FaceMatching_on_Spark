@@ -5,7 +5,6 @@ import json
 import cv2
 import sys
 import os
-import calculate_similarity as rs
 
 reload(sys)
 sys.setdefaultencoding('utf8')
@@ -80,5 +79,5 @@ def upload(request):
 
 
 def test(request):
-    # os.system("/opt/spark-2.2.1-bin-hadoop2.7/bin/spark-submit --master=yarn /var/www/html/FaceMatching_on_Spark/calculate_similarity.py")
-    rs.run_spark()
+    os.system("/opt/spark-2.2.1-bin-hadoop2.7/bin/spark-submit --master=yarn /var/www/html/FaceMatching_on_Spark/calculate_similarity.py")
+    # rs.run_spark()
