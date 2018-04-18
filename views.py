@@ -48,6 +48,8 @@ def upload(request):
     if request.method == "POST":
         ret = {'status': 'fail', 'data': {'human_photo': None, 'cat_photo': None}, 'error': None}
 
+        os.system("rm -rf /var/www/html/FaceMatching_on_Spark/static/image/cat_photo.png")
+        os.system("rm -rf /var/www/html/FaceMatching_on_Spark/static/image/human_photo.png")
         pic_file = request.FILES.get("photo")       # get photo
         file_path = os.path.join("static/image", "human_photo.png")
         f = open(file_path, mode="wb")
