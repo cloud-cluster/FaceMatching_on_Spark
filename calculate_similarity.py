@@ -11,9 +11,9 @@ import re
 reload(sys)
 sys.setdefaultencoding('utf8')
 
-human_haar_cascade_path = "static/haarcascade/haarcascade_frontalface_default.xml"
+human_haar_cascade_path = "/var/www/html/FaceMatching_on_Spark/static/haarcascade/haarcascade_frontalface_default.xml"
 result_photo = "/var/www/html/FaceMatching_on_Spark/static/image/cat_photo.png"
-human_photo_path = 'static/image/human_photo.png'
+human_photo_path = '/var/www/html/FaceMatching_on_Spark/static/image/human_photo.png'
 client = Client("http://student62:50070")
 find_path = '/var/www/html/database'
 
