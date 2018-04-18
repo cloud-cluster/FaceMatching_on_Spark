@@ -280,12 +280,12 @@
    })
 
     var getting = {
-        url:'http://202.45.128.135:10062/FaceMatching_on_Spark/static/image/human_photo.png',
+        url:'http://202.45.128.135:10062/FaceMatching_on_Spark/static/image/cat_photo.png',
         success:function(res) {
             clearInterval(timer);
             console.log(res);
             $('#loading').hide();
-            $('#blah2').attr('src', 'http://202.45.128.135:10062/FaceMatching_on_Spark/static/image/human_photo.png');
+            $('#blah2').attr('src', 'http://202.45.128.135:10062/FaceMatching_on_Spark/static/image/cat_photo.png');
             $('#blah2').one("load", function() {
                 // do stuff
             }).each(function() {
