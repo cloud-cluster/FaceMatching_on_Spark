@@ -57,7 +57,7 @@ def find_feature_in_hbase(cat_img):
     cat_lists = []
     cat_features = []
     print "All the cat's photo amount = " + str(len(cat_img))
-    for i in range(0, 49):
+    for i in range(0, 9949):
         cat_feature = WHB.read_feature('database', cat_img[i])
         if cat_feature != 'Error':
             print "Photo No. = " + str(i) + "    Photo Name = " + str(cat_img[i])
