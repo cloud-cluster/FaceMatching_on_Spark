@@ -46,7 +46,7 @@ def home(request):
 
 def upload(request):
     if request.method == "POST":
-        ret = {'status': 'fail', 'data': {'human_photo': None, 'cat_photo': None}, 'error': None}
+        ret = {'status': 'fail', 'data': {'human_photo': None, 'cat_photo': None}, 'error': None, 'Access-Control-Allow-Origin': '*'}
 
         os.system("rm -rf /var/www/html/FaceMatching_on_Spark/static/image/cat_photo.png")
         os.system("rm -rf /var/www/html/FaceMatching_on_Spark/static/image/human_photo.png")
@@ -76,7 +76,7 @@ def upload(request):
             ret['status'] = 'success'
             ret['data']['human_photo'] = file_path
             ret['data']['cat_photo'] = cat_photo_path
-        ret.setHeader("Access-Control-Allow-Origin", "*")
+            # ret["Access-Control-Allow-Origin"] = "*"
         return HttpResponse(json.dumps(ret), content_type='application/json')
 
 
