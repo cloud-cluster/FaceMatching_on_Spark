@@ -215,7 +215,7 @@
                 $('#loading').show();
                 fd.append('photo', photo);
                 console.log('fd=', fd);
-                var timer = window.setInterval(function(){$.ajax(getting)},1000);
+                // var timer = window.setInterval(function(){$.ajax(getting)},1000);
                 $.ajax({
                     url: '/upload/',
                     type: "POST",
@@ -225,25 +225,25 @@
                     success: function (data) {
                         console.dir('data=',data)
                         if (data.status == 'success') {
-                            // $('#loading').hide();
+                            $('#loading').hide();
                             //alert(data.data)
                             console.dir(data);
-                            // $('#blah').attr('src', 'http://202.45.128.135:10062/FaceMatching_on_Spark/'+data.data.human_photo);
-                            // // $('#blah2').attr('src', 'http://202.45.128.135:10062/FaceMatching_on_Spark/'+data.data.cat_photo);
-                            // $('#blah').one("load", function() {
-                            //   // do stuff
-                            // }).each(function() {
-                            //   if(this.complete) $(this).load();
-                            // });
-                            // $('#blah2').one("load", function() {
-                            //   // do stuff
-                            // }).each(function() {
-                            //   if(this.complete) $(this).load();
-                            // });                        
+                            $('#blah').attr('src', 'http://202.45.128.135:10062/FaceMatching_on_Spark/'+data.data.human_photo);
+                            $('#blah2').attr('src', 'http://202.45.128.135:10062/FaceMatching_on_Spark/'+data.data.cat_photo);
+                            $('#blah').one("load", function() {
+                              // do stuff
+                            }).each(function() {
+                              if(this.complete) $(this).load();
+                            });
+                            $('#blah2').one("load", function() {
+                              // do stuff
+                            }).each(function() {
+                              if(this.complete) $(this).load();
+                            });                        
                         } else {
                             //{"status": "fail", "data": {"cat_photo": null, "human_photo": null}, "error": 0 检测人脸失败  1 分布式失败}
                             $('#loading').hide();
-                            clearInterval(timer);
+                            // clearInterval(timer);
                             if(data.error == 0 || data.error == '0'){
                                 console.log('face detection error!');
                                 alert('You are so handsome that no cat could match you! Maybe change another photo?')
@@ -286,7 +286,7 @@
         // dataType: 'jsonp',
         // crossDomain: true,
         success:function(res) {
-            clearInterval(timer);
+            // clearInterval(timer);
             console.log(res);
             $('#loading').hide();
             $('#blah').attr('src', 'http://202.45.128.135:10062/FaceMatching_on_Spark/static/image/human_photo.png');
