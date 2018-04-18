@@ -61,16 +61,20 @@ def upload(request):
         else:
             client.upload(human_photo_path, file_path, overwrite=True)
 
-            os.system("/opt/spark-2.2.1-bin-hadoop2.7/bin/spark-submit --master=yarn --driver-memory 7168m --executor-memory 4G /var/www/html/FaceMatching_on_Spark/calculate_similarity.py")
+            # os.system("/opt/spark-2.2.1-bin-hadoop2.7/bin/spark-submit --master=yarn --driver-memory 7168m --executor-memory 4G /var/www/html/FaceMatching_on_Spark/calculate_similarity.py")
 
-            result = 0
+            # result = 0
 
-            if result == 0:
-                ret['status'] = 'success'
-                ret['data']['human_photo'] = file_path
-                ret['data']['cat_photo'] = cat_photo_path
-            else:
-                ret['error'] = 1
+            # if result == 0:
+            #     ret['status'] = 'success'
+            #     ret['data']['human_photo'] = file_path
+            #     ret['data']['cat_photo'] = cat_photo_path
+            # else:
+            #     ret['error'] = 1
+
+            ret['status'] = 'success'
+            ret['data']['human_photo'] = file_path
+            ret['data']['cat_photo'] = cat_photo_path
 
         return HttpResponse(json.dumps(ret), content_type='application/json')
 
