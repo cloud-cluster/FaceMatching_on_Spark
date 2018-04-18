@@ -74,7 +74,7 @@ def upload(request):
             ret['status'] = 'success'
             ret['data']['human_photo'] = file_path
             ret['data']['cat_photo'] = cat_photo_path
-
+        ret.setHeader("Access-Control-Allow-Origin", "*")
         return HttpResponse(json.dumps(ret), content_type='application/json')
 
 
